@@ -31,9 +31,12 @@ Cookbooks
 Requires Opscode's openssl cookbook for secure password generation.
 See _Attributes_ and _Usage_ for more information.
 
-The RubyGem installation in the `mysql::ruby` recipe requires a C
-compiler and Ruby development headers to be installed in order to
-build the mysql gem.
+**Note**: The RubyGem installation in the `mysql::ruby` recipe requires a C
+compiler and Ruby development headers to be installed _at compile time_ (as Chef 
+[identifies the resources to be run](http://docs.opscode.com/essentials_nodes_chef_run.html))
+in order to build the mysql gem. When using the `build-essential` cookbook, for instance,
+make sure to include `node.set['build_essential']['compiletime'] = true` in the recipe
+including build_essential to ensure proper load order. 
 
 Requires `homebrew`
 [cookbook](http://community.opscode.com/cookbooks/homebrew) on Mac OS
